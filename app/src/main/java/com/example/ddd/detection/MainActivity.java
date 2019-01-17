@@ -19,22 +19,16 @@ import org.litepal.LitePal;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ContentResolver cr = null;
-    private pictureOcr pictureocr = new pictureOcr();
+    private pictureOcr pictureocr = null;//new pictureOcr();   //图片Ocr
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cr = getContentResolver();
-        pictureocr.setCr(cr);
-        //SQLiteDatabase db = LitePal.getDatabase();
 
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-        }else{
-        }
+        Init();
+        RequestPermission();
 
         Button button = (Button) findViewById(R.id.databaseCreate);
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,14 +47,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void Init(){
+
+        //图片ocr的初始化
+        //SQLiteDatabase db = LitePal.getDatabase();
+        pictureocr = new pictureOcr(getContentResolver());
+
+    }
+
+    private void RequestPermission(){
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }else{
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults){
         switch (requestCode){
             case 1:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
                 }else{
-                    Toast.makeText(this,"You denied Permission",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"You denied READ_EXTERNAL_STORAGE",Toast.LENGTH_SHORT).show();
                 }
             default:
         }
