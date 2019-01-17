@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,13 +22,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class pictureOcr extends AppCompatActivity {
+public class pictureOcr extends AppCompatActivity implements Runnable{
 
     private ContentResolver cr = null;
     private TestOCR ocr = null;
+    private Handler handler = null;
 
-    public pictureOcr(ContentResolver a){
+    public pictureOcr(ContentResolver a,Handler b){
         cr = a;    // ContentResolver 初始化
+        handler = b;
         ocr = new TestOCR();
     }
 
@@ -41,7 +45,8 @@ public class pictureOcr extends AppCompatActivity {
         }
     }
 
-    public void pictureDatabaseCreate() {
+    @Override
+    public void run() {
 
         String[] projection = new String[]{MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA, MediaStore.Images.ImageColumns.DISPLAY_NAME};
 
@@ -71,6 +76,10 @@ public class pictureOcr extends AppCompatActivity {
         }
         cursor.close();
         cursor = null;
+
+        Message message = new Message();
+        message.what = 1;
+        handler.sendMessage(message);
     }
 
     private Bitmap GetBitmap(String path){

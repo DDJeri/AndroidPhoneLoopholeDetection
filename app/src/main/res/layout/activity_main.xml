@@ -20,12 +20,21 @@
         android:layout_height="wrap_content"
         android:text="query" >
     </Button>
-    <ImageView
-        android:id="@+id/image_view"
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delete" >
+    </Button>
+
+    <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" >
-    </ImageView>
+        android:layout_centerInParent="true"
+        android:text="Hello world"
+        android:textSize="24sp" />
 
 
 </LinearLayout>
