@@ -57,10 +57,10 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
     @Override
     protected Integer doInBackground(Void... params) {
 
-        int num = 0;
+        int num = 1;
         /* 读取数据库 */
         List<Picture> pictures = LitePal.findAll(Picture.class);
-        progressNum = pictures.size();
+        progressNum = pictures.size()+1;
 
         /* 做ocr */
         for(Picture picture: pictures){
@@ -68,8 +68,8 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
                 LitePal.deleteAll(Picture.class);
                 return TYPE_CANCELED;
             }
+            publishProgress(++num);
             if(picture.getOcrResult() != null){    // 已经做过ocr
-
             } else{    // 未做过ocr
                 Bitmap bitmap = GetBitmap(picture.getPath());
                 if(bitmap != null){
@@ -79,7 +79,6 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
                                 //删除
                 }
             }
-            publishProgress(++num);
         }
         return num;
     }

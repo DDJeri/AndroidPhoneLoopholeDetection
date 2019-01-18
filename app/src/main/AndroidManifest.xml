@@ -24,7 +24,10 @@
         <service
             android:name=".service.pictureService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".ResultActivity"
+            ></activity>
     </application>
 
 </manifest>

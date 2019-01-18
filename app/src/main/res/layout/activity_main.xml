@@ -7,25 +7,31 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/databaseCreate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="databaseCreate" >
-    </Button>
+    <include layout="@layout/title"/>
 
     <Button
-        android:id="@+id/query"
+        android:id="@+id/PictureDetection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="query" >
+        android:text="PictureDetection" >
     </Button>
-
     <Button
         android:id="@+id/delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="delete" >
+    </Button>
+    <Button
+        android:id="@+id/ShortMessageDetection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ShortMessageDetection" >
+    </Button>
+    <Button
+        android:id="@+id/Result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result" >
     </Button>
 
     <ProgressBar
@@ -35,12 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="none"
-        android:gravity="center"
-        android:textSize="24sp"/>
 
 
 </LinearLayout>

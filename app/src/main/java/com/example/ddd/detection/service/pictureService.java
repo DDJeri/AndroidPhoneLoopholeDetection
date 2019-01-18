@@ -46,13 +46,10 @@ public class pictureService extends Service {
     }
 
     public class pictureBinder extends Binder {
-        public void SyncDatabase(){
+        public void OcrProcess(){
+            MainActivity.progressBar.setVisibility(View.VISIBLE);
             if(ocrTask == null){
                 ocrTask = new OcrTask(pictureService.this,listener);
-            }
-        }
-        public void OcrProcess(){
-            if(ocrTask != null){
                 ocrTask.execute();
             }
         }

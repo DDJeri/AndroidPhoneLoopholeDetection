@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,16 +40,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionbar = getSupportActionBar();
+        if(actionbar != null){
+            actionbar.hide();
+            TextView text = (TextView) findViewById(R.id.title_text);
+            text.setText("Detection");
+        }
 
-        Button syncDatabase = (Button) findViewById(R.id.databaseCreate);
-        Button OcrProcess = (Button) findViewById(R.id.query);
+        Button PictureDetection = (Button) findViewById(R.id.PictureDetection);
         Button Pause = (Button) findViewById(R.id.delete);
-        TextView text = (TextView) findViewById(R.id.text);
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        Button Result = (Button) findViewById(R.id.Result);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);progressBar.setVisibility(View.INVISIBLE);
 
-        syncDatabase.setOnClickListener(this);
-        OcrProcess.setOnClickListener(this);
+        PictureDetection.setOnClickListener(this);
         Pause.setOnClickListener(this);
+        Result.setOnClickListener(this);
         Intent intent = new Intent(this,pictureService.class);
         startService(intent); // 启动服务
         bindService(intent, connection, BIND_AUTO_CREATE); // 绑定服务
@@ -63,15 +69,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         switch (v.getId()) {
-            case R.id.databaseCreate:
-                pictureBinder.SyncDatabase();
-                break;
-            case R.id.query:
+            case R.id.PictureDetection:
                 pictureBinder.OcrProcess();
                 break;
             case R.id.delete:
                 pictureBinder.Pause();
                 break;
+            case R.id.Result:
+                Intent intent = new Intent(MainActivity.this,ResultActivity.class);
+                startActivity(intent);
             default:
                 break;
         }
