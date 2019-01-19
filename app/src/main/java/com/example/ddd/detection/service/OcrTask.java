@@ -143,12 +143,14 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
             fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME));
             filePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
 
-            Picture picture = new Picture();
-            picture.setImageId(imageId);
-            picture.setPath(filePath);
-            picture.save();
-
-            Log.e("photos", imageId + " -- " + fileName + " -- " + filePath);
+            List<Picture> pictures = LitePal.where("path=?",filePath).find(Picture.class);
+            if(pictures.isEmpty()){
+                Picture picture = new Picture();
+                picture.setImageId(imageId);
+                picture.setPath(filePath);
+                picture.save();
+                Log.e("photos", imageId + " -- " + fileName + " -- " + filePath);
+            }
         }
         cursor.close();
     }

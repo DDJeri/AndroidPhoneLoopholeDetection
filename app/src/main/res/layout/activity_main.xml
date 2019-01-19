@@ -7,7 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <include layout="@layout/title"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <Button
         android:id="@+id/PictureDetection"
@@ -15,6 +21,12 @@
         android:layout_height="wrap_content"
         android:text="PictureDetection" >
     </Button>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:max="1000"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/delete"
         android:layout_width="match_parent"
@@ -33,14 +45,5 @@
         android:layout_height="wrap_content"
         android:text="Result" >
     </Button>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:max="1000"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
 
 </LinearLayout>

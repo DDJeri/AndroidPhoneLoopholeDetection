@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.ddd.detection.MainActivity;
+import com.example.ddd.detection.db.Picture;
+
+import org.litepal.LitePal;
 
 public class pictureService extends Service {
 
@@ -54,9 +57,11 @@ public class pictureService extends Service {
             }
         }
         public void Pause(){
-            if(ocrTask != null){
-                ocrTask.cancelOcr();
-            }
+            //if(ocrTask != null){
+               // ocrTask.cancelOcr();
+           // }
+            LitePal.deleteAll(Picture.class);
+            Toast.makeText(pictureService.this, "Database Deleted", Toast.LENGTH_SHORT).show();
         }
     }
 

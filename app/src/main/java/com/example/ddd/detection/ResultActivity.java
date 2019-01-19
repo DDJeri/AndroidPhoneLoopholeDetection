@@ -1,21 +1,49 @@
 package com.example.ddd.detection;
 
+import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ddd.detection.db.Picture;
+import com.example.ddd.detection.util.OcrAdapter;
+import com.example.ddd.detection.util.OcrResult;
+
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class ResultActivity extends AppCompatActivity {
+
+    private List<OcrResult> ocrShow = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        ActionBar actionbar = getSupportActionBar();
-        if(actionbar != null){
-            actionbar.hide();
-            TextView text = (TextView) findViewById(R.id.title_text);
-            text.setText("Result");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        List<Picture> pictures = LitePal.findAll(Picture.class);
+        for(Picture picture:pictures){
+            ocrShow.add(new OcrResult(picture.getOcrResult(),picture.getPath()));
         }
+        OcrAdapter adapter = new OcrAdapter(ResultActivity.this,R.layout.image_item,ocrShow);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
     }
 }
