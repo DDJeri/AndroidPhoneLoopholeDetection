@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="Detection">
+            android:label="手机漏洞检测">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,7 @@
 
         <activity
             android:name=".ResultActivity"
-            android:label="Result" />
+            android:label="检测结果" />
 
         <service
             android:name=".service.message.messageService"
