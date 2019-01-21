@@ -40,6 +40,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:id="@+id/publickey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="第三方应用检测" >
+    </Button>
+    <Button
+        android:layout_marginTop="60dp"
         android:id="@+id/Result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

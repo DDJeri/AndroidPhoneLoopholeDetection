@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.ddd.detection.service.message.messageService;
 import com.example.ddd.detection.service.picture.pictureService;
+import com.example.ddd.detection.service.publickey.AppInformation;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -59,11 +60,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button PictureDetection = (Button) findViewById(R.id.PictureDetection);
         Button MessageDetection = (Button) findViewById(R.id.ShortMessageDetection);
         Button Result = (Button) findViewById(R.id.Result);
+        Button AppDetection = (Button) findViewById(R.id.publickey);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);progressBar.setVisibility(View.INVISIBLE);
         messageProgressBar = (ProgressBar) findViewById(R.id.message_progress_bar);messageProgressBar.setVisibility(View.INVISIBLE);
 
         PictureDetection.setOnClickListener(this);
         MessageDetection.setOnClickListener(this);
+        AppDetection.setOnClickListener(this);
         Result.setOnClickListener(this);
 
         Intent intent = new Intent(this,pictureService.class);
@@ -92,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ShortMessageDetection:
                 messageBinder.DetectionProcess();
+                break;
+            case R.id.publickey:
+                Intent intent_App = new Intent(this,AppInformation.class);
+                startService(intent_App);
                 break;
             case R.id.Result:
                 Intent intent = new Intent(MainActivity.this,ResultActivity.class);

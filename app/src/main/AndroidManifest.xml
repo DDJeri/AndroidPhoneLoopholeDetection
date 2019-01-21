@@ -36,6 +36,10 @@
         <service
             android:name=".service.message.messageService"
             android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.publickey.AppInformation"
+            android:enabled="true"
             android:exported="true"></service>
     </application>
 
