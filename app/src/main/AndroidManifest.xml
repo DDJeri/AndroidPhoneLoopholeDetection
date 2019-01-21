@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name="org.litepal.LitePalApplication"
@@ -13,22 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-                  android:label="Detection">
+        <activity
+            android:name=".MainActivity"
+            android:label="Detection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <service
-            android:name=".service.pictureService"
+            android:name=".service.picture.pictureService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ResultActivity"
-            android:label="Result"
-            ></activity>
+        <activity
+            android:name=".ResultActivity"
+            android:label="Result" />
+
+        <service
+            android:name=".service.message.messageService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

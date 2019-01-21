@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ddd.detection.db.Message;
 import com.example.ddd.detection.db.Picture;
 import com.example.ddd.detection.util.OcrAdapter;
 import com.example.ddd.detection.util.OcrResult;
@@ -36,6 +37,10 @@ public class ResultActivity extends AppCompatActivity {
         List<Picture> pictures = LitePal.findAll(Picture.class);
         for(Picture picture:pictures){
             ocrShow.add(new OcrResult(picture.getOcrResult(),picture.getPath()));
+        }
+        List<Message> messages = LitePal.findAll(Message.class);
+        for(Message message:messages){
+            ocrShow.add(new OcrResult(message.getBody(),""));
         }
         OcrAdapter adapter = new OcrAdapter(ResultActivity.this,R.layout.image_item,ocrShow);
         ListView listView = (ListView) findViewById(R.id.list_view);

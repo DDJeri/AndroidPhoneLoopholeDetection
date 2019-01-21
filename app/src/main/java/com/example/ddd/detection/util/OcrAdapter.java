@@ -28,7 +28,8 @@ public class OcrAdapter extends ArrayAdapter<OcrResult> {
         View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
         ImageView imageview = (ImageView) view.findViewById(R.id.image);
         TextView textview = (TextView) view.findViewById(R.id.ocrResult);
-        imageview.setImageBitmap(ocrResult.GetBitmap());
+        if(!ocrResult.getImpagePath().isEmpty())
+            imageview.setImageBitmap(ocrResult.GetBitmap());
         textview.setText(ocrResult.getOcrResult());
         return view;
     }

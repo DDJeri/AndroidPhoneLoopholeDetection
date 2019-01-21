@@ -19,7 +19,7 @@
         android:id="@+id/PictureDetection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PictureDetection" >
+        android:text="图片检测" >
     </Button>
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -28,22 +28,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="delete" >
-    </Button>
-    <Button
         android:id="@+id/ShortMessageDetection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ShortMessageDetection" >
+        android:text="短信检测" >
     </Button>
+    <ProgressBar
+        android:id="@+id/message_progress_bar"
+        android:max="1000"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/Result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Result" >
+        android:text="检测结果" >
     </Button>
 
 </LinearLayout>

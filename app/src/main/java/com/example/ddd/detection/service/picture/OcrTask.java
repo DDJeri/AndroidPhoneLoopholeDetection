@@ -1,4 +1,4 @@
-package com.example.ddd.detection.service;
+package com.example.ddd.detection.service.picture;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.example.ddd.detection.MainActivity;
 import com.example.ddd.detection.db.Picture;
 import com.googlecode.tesseract.android.TessBaseAPI;
 

@@ -1,4 +1,4 @@
-package com.example.ddd.detection.service;
+package com.example.ddd.detection.service.picture;
 
 public interface pictureOcrListener {
 
