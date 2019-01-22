@@ -7,6 +7,15 @@ public class AppInfo extends LitePalSupport {
     private String appName;
     private String packageName;
     private String publickey;
+    private String permissions;
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
 
     public String getAppName() {
         return appName;

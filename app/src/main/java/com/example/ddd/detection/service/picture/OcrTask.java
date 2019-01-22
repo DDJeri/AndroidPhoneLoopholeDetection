@@ -68,15 +68,16 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
                 return TYPE_CANCELED;
             }
             publishProgress(++num);
-            if(picture.getOcrResult() != null){    // 已经做过ocr
-            } else{    // 未做过ocr
-                Bitmap bitmap = GetBitmap(picture.getPath());
-                if(bitmap != null){
+            Bitmap bitmap = null;
+            if(picture.isHasWrite() == false){         //图片已经不存在
+                picture.delete();
+                continue;
+            }else{
+                bitmap = GetBitmap(picture.getPath());
+                if(picture.getOcrResult() == null && bitmap != null)    //未0CR
                     picture.setOcrResult(getOCRResult(bitmap));    //加入OCR结果
-                    picture.save();
-                }else{
-                                //删除
-                }
+                picture.setHasWrite(false);
+                picture.save();
             }
         }
         return num;
@@ -143,12 +144,18 @@ public class OcrTask extends AsyncTask<Void, Integer, Integer> {
             filePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
 
             List<Picture> pictures = LitePal.where("path=?",filePath).find(Picture.class);
+            Log.v("photosttttttt", imageId + " -- " + fileName + " -- " + filePath);
             if(pictures.isEmpty()){
                 Picture picture = new Picture();
                 picture.setImageId(imageId);
                 picture.setPath(filePath);
+                picture.setHasWrite(true);
                 picture.save();
-                Log.e("photos", imageId + " -- " + fileName + " -- " + filePath);
+                Log.v("photoswwwwww", imageId + " -- " + fileName + " -- " + filePath);
+            }else{
+                Picture picture = pictures.get(0);
+                picture.setHasWrite(true);
+                picture.save();
             }
         }
         cursor.close();

@@ -33,6 +33,7 @@ public class AppInformation extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        LitePal.deleteAll(AppInfo.class);
         syncDatabase();
     }
 
@@ -49,7 +50,7 @@ public class AppInformation extends Service {
 
     private void syncDatabase(){
 
-        List<PackageInfo> packages = getPackageManager().getInstalledPackages(PackageManager.GET_SIGNATURES | PackageManager.GET_ACTIVITIES);
+        List<PackageInfo> packages = getPackageManager().getInstalledPackages(PackageManager.GET_SIGNATURES | PackageManager.GET_ACTIVITIES | PackageManager.GET_PERMISSIONS);
         for(int i=0;i<packages.size();i++) {
             PackageInfo packageInfo = packages.get(i);
             if((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)==0) {
@@ -67,12 +68,20 @@ public class AppInformation extends Service {
                             publickey.indexOf(","));
                     Log.d("TRACK", publickey+" :"+publickey.length());
 
+                    String[] permissions = packageInfo.requestedPermissions;
+                    String a = "";
+                    if(permissions != null){
+                        for(String permission : permissions)
+                            a += permission + "\n";
+                    }
+
                     List<AppInfo> apps = LitePal.where("packageName=?",packageInfo.packageName).find(AppInfo.class);
                     if(apps.isEmpty()){
                         AppInfo appinfo = new AppInfo();
                         appinfo.setAppName(packageInfo.applicationInfo.loadLabel(getPackageManager()).toString());
                         appinfo.setPackageName(packageInfo.packageName);
                         appinfo.setPublickey(publickey);
+                        if(!a.isEmpty()){appinfo.setPermissions(a);}
                         appinfo.save();
                     }
 

@@ -8,6 +8,15 @@ public class Picture extends LitePalSupport {
     private String path;
     private String ocrResult;
     private boolean hasWord;
+    private boolean hasWrite;
+
+    public boolean isHasWrite() {
+        return hasWrite;
+    }
+
+    public void setHasWrite(boolean hasWrite) {
+        this.hasWrite = hasWrite;
+    }
 
     public String getImageId() {
         return imageId;

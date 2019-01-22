@@ -47,7 +47,7 @@ public class ResultActivity extends AppCompatActivity {
 
         List<AppInfo> apps = LitePal.findAll(AppInfo.class);
         for(AppInfo appInfo:apps){
-            ocrShow.add(new OcrResult(appInfo.getAppName() + "\n" + appInfo.getPublickey(),""));
+            ocrShow.add(new OcrResult(appInfo.getAppName() + "\n" + appInfo.getPublickey() + appInfo.getPermissions(),""));
         }
 
         OcrAdapter adapter = new OcrAdapter(ResultActivity.this,R.layout.image_item,ocrShow);

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     Toast.makeText(this,"You denied READ_SMS",Toast.LENGTH_SHORT).show();
                 }
-                break;
+                break; 
             default:
                 break;
         }
